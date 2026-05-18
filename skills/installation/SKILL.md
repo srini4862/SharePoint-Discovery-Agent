@@ -42,17 +42,23 @@ Configures authentication for Microsoft 365.
 - Connection status
 
 ## Tool Dependencies
-- powershell_execute: For running PowerShell commands
+- powershell_execute: For running existing PowerShell scripts
 - powershell_authenticate: For authenticating PowerShell session
-- file_write: For writing installation logs
 - file_read: For reading configuration
+- retry_handler: For retrying transient errors
+- self_heal_script: For analyzing and fixing script failures
+- file_write: For saving healed scripts
 
 ## Examples
+To verify prerequisites using the existing script:
 ```python
-# Verify prerequisites
-verification = await skills.verify_prerequisites()
+result = await tools.powershell_execute(
+    script_path="scripts/setup/verify_prerequisites.ps1"
+)
+```
 
-# Install PnP.PowerShell
+To install PnP.PowerShell using the existing script:
+```python
 result = await tools.powershell_execute(
     script_path="scripts/setup/install_pnp.ps1",
     parameters={"force": true}
@@ -64,3 +70,4 @@ result = await tools.powershell_execute(
 - Reuses authentication context from intake phase
 - Validates installation success
 - Uses PnP.PowerShell only (no Microsoft Graph)
+- MUST use existing scripts first. If they fail due to outdated documentation or environment issues, use `self_heal_script` to analyze and apply fixes.

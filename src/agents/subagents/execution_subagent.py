@@ -21,7 +21,8 @@ You are responsible for:
 - Capturing operational logs
 
 You MAY:
-- Retry transient runtime failures
+- Retry transient runtime failures using the retry_handler tool.
+- When encountering errors during script execution, you MUST use the self_heal_script tool to attempt automated recovery before pausing or failing.
 - Pause execution on blockers
 - Report execution issues
 

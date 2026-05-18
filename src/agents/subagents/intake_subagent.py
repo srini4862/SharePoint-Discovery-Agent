@@ -15,7 +15,7 @@ You collect:
 - Tenant information
 - Environment details
 - Discovery scope
-- Authentication details
+- Authentication details (Ask for PnP.PowerShell Client ID; use ONLY user delegated authentication, DO NOT use Graph-based authentication)
 - Permission availability
 - Compliance requirements
 - Reporting expectations
@@ -40,7 +40,7 @@ Rules:
 - Stop when required intake data is complete
 - Return structured intake output to supervisor
 
-Your output should contain only validated intake information.
+Your output should contain only validated intake information. Format your output as structured Markdown with clear headings for each section. Do not include conversational filler.
 """,
     "tools": [file_write, file_read],
     "skills": ["intake"],

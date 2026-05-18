@@ -45,6 +45,8 @@ Your output should contain:
 - Risk summary
 - Recommendations
 - Export-ready report artifacts.
+
+Generate the final report using a professional, enterprise-grade tone consistent with Dell Technologies standards. You MUST use the file_write tool to save the final generated report to the disk; do not just output it to the console.
 """,
     "tools": [file_read, file_write],
     "skills": ["reporting", "assessment"],

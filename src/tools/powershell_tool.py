@@ -26,7 +26,7 @@ _powershell_session = PowerShellSession()
 
 
 @tool
-def powershell_execute(script_path: str, parameters: dict = None) -> str:
+def powershell_execute(script_path: str, parameters: dict) -> str:
     """
     Execute PowerShell script with optional parameters.
 
@@ -43,8 +43,19 @@ def powershell_execute(script_path: str, parameters: dict = None) -> str:
         parameters = {}
 
     try:
+        from pathlib import Path
+        script_path_obj = Path(script_path)
+        if not script_path_obj.is_absolute():
+            # Resolve relative to project root (powershell_tool.py is in src/tools)
+            project_root = Path(__file__).parent.parent.parent
+            script_path_obj = project_root / script_path
+            
+        script_path_str = str(script_path_obj.resolve())
+        if not script_path_obj.exists():
+            return json.dumps({"error": f"Script not found at path: {script_path_str}", "success": False})
+
         # Build PowerShell command with authentication context
-        ps_command = f"& '{script_path}'"
+        ps_command = f"& '{script_path_str}'"
         for key, value in parameters.items():
             ps_command += f" -{key} '{value}'"
 

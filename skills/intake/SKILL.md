@@ -1,30 +1,28 @@
 # Intake Skill
 
 ## Description
-This skill enables question-based intake for gathering discovery requirements and authentication credentials.
+This skill enables question-based intake for gathering comprehensive discovery requirements and authentication context.
 
 ## Capabilities
 
-### Requirement Gathering
-Collects comprehensive discovery requirements from the user.
+### 1. Interactive Requirement Gathering
+Collects all necessary information from the user required before discovery planning can begin.
 
-**Parameters:**
-- None (interactive)
+**Inputs:**
+- None (Interactive chat flow)
 
-**Output:**
-- Intake data including tenant name, tenant ID, client ID
-- Discovery scope
+**Outputs:**
+- Tenant information (Tenant Name, Azure AD Tenant ID)
+- Authentication details (PnP.PowerShell Client ID; specify ONLY user delegated authentication, NO Graph-based authentication)
+- Environment details & Discovery scope
+- Permission availability
+- Compliance requirements & Reporting expectations
 
-**Parameters:**
-- tenant_name: Tenant name
-- tenant_id: Azure AD tenant ID
-- client_id: Azure AD client ID
-
-**Output:**
-- Saved credentials in memory for use in later phases
+### 2. State Management
+**Outputs:**
+- Returns all gathered information as structured Markdown to the Supervisor Agent. This ensures the data is persisted in the workflow state for reuse by the Planning and Execution agents.
 
 ## Notes
-- Asks one question at a time
-- Validates responses before proceeding
-- Saves credentials in memory for reuse in later phases
-- Avoids repeatedly asking for credentials
+- Ask clear, concise, step-by-step questions.
+- Validate responses before proceeding to the next question.
+- Avoid repeatedly asking for credentials once they have been provided.

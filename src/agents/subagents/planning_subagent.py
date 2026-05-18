@@ -47,6 +47,8 @@ Your output should contain:
 - Execution phases
 - Risks and blockers
 - Approval requirements.
+
+Format your output as structured Markdown with clear headings for each section. Do not include conversational filler.
 """,
     "tools": [file_write, file_read],
     "skills": ["planning"],
