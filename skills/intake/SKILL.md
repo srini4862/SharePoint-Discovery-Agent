@@ -14,9 +14,9 @@ Collects all necessary information from the user required before discovery plann
 **Outputs:**
 - Tenant information (Tenant Name, Azure AD Tenant ID)
 - Authentication details (PnP.PowerShell Client ID; specify ONLY user delegated authentication, NO Graph-based authentication)
-- Environment details & Discovery scope
+- Where you are running this agent (Dell or Customer Environment) & Discovery scope
 - Permission availability
-- Compliance requirements & Reporting expectations
+- Reporting expectations
 
 ### 2. State Management
 **Outputs:**
@@ -26,3 +26,4 @@ Collects all necessary information from the user required before discovery plann
 - Ask clear, concise, step-by-step questions.
 - Validate responses before proceeding to the next question.
 - Avoid repeatedly asking for credentials once they have been provided.
+- After all required information is gathered, display the captured details to the user and obtain their final confirmation.
