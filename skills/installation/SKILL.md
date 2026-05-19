@@ -70,4 +70,4 @@ result = await tools.powershell_execute(
 - Reuses authentication context from intake phase
 - Validates installation success
 - Uses PnP.PowerShell only (no Microsoft Graph)
-- MUST use existing scripts first. If they fail due to outdated documentation or environment issues, use `self_heal_script` to analyze and apply fixes.
+- MUST use existing scripts first. If they fail due to outdated documentation or environment issues, use `self_heal_script` to analyze and apply fixes. Do not create new scripts.

@@ -3,7 +3,7 @@
 from langchain_anthropic import ChatAnthropic
 from langchain_openai import ChatOpenAI
 from langgraph.checkpoint.memory import MemorySaver
-from deepagents import create_deep_agent
+from deepagents import create_deep_agent, SubAgent
 from agents.subagents import (
     intake_subagent,
     planning_subagent,
@@ -29,11 +29,11 @@ def create_sharepoint_discovery_agent():
     """
     # Define subagents
     subagents = [
-        intake_subagent,
-        planning_subagent,
-        installation_subagent,
-        execution_subagent,
-        reporting_subagent,
+        SubAgent(**intake_subagent),
+        SubAgent(**planning_subagent),
+        SubAgent(**installation_subagent),
+        SubAgent(**execution_subagent),
+        SubAgent(**reporting_subagent),
     ]
 
     checkpointer = MemorySaver()
@@ -42,7 +42,7 @@ def create_sharepoint_discovery_agent():
     if settings.llm_provider == "openai":
         model = ChatOpenAI(model=settings.model)
     elif settings.llm_provider == "anthropic":
-        model = ChatAnthropic(model=settings.model)
+        model = ChatAnthropic(model_name=settings.model)
     else:
         model = ChatOpenAI(model=settings.model)  # Default
 
@@ -56,9 +56,9 @@ def create_sharepoint_discovery_agent():
 
     Available subagents:
     - intake-agent
-    - planning-agent
     - installation-agent
     - execution-agent
+    - planning-agent
     - reporting-agent
 
     Your responsibilities:
@@ -80,15 +80,16 @@ def create_sharepoint_discovery_agent():
 
     Workflow sequence:
     1. Intake
-    2. Planning
-    3. Installation
-    4. Execution
+    2. Installation
+    3. Execution
+    4. Planning
     5. Reporting
 
     Rules:
     - Always delegate onboarding to intake-agent
     - Always use the most specialized agent available
     - Do not skip workflow stages unless explicitly approved
+    - DO NOT route to the next workflow stage until the current subagent explicitly confirms it has completed its entire task. For Intake, wait until ALL questions are asked.
     - Preserve shared context between agents
     - Avoid duplicate interactions
     - Never expose internal orchestration logic

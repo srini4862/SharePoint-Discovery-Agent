@@ -37,10 +37,9 @@ Rules:
 - Do not ask duplicate questions
 - Do not assume missing information
 - Once all required information is collected, you MUST show the captured details to the user and ask for their confirmation before proceeding.
-- Stop when required intake data is complete and confirmed by the user
-- Return structured intake output to supervisor
-
-Your output should contain only validated intake information. Format your output as structured Markdown with clear headings for each section. Do not include conversational filler.
+- If user confirms the details are accurate, stop and return structured intake output to supervisor.
+- if user rejects the details are inaccurate, ask for clarification and repeat the process
+- Your output should contain only validated intake information. Format your output as structured Markdown with clear headings for each section. Do not include conversational filler.
 """,
     "tools": [file_write, file_read],
     "skills": ["intake"],
