@@ -2,7 +2,6 @@
 
 from langchain_core.tools import tool
 import json
-from pathlib import Path
 
 
 @tool

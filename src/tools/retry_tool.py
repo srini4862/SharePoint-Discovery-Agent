@@ -51,19 +51,18 @@ def self_heal_script(script_path: str, error_message: str) -> str:
         Healing result or error
     """
     try:
-        from pathlib import Path
         path = Path(script_path)
-        
+
         if not path.exists():
             return json.dumps({"success": False, "error": "Script file does not exist"})
-        
+
         # Read script content
         content = path.read_text()
-        
+
         # Simple error analysis and healing logic
         # In a real implementation, this would use LLM to analyze and fix errors
         healing_actions = []
-        
+
         # Check for common errors and apply fixes
         if "cannot find" in error_message.lower():
             healing_actions.append("Added missing parameter validation")
@@ -71,7 +70,7 @@ def self_heal_script(script_path: str, error_message: str) -> str:
             healing_actions.append("Updated authentication parameters")
         if "permission" in error_message.lower():
             healing_actions.append("Added permission checks")
-        
+
         if healing_actions:
             # In a real implementation, this would modify the script
             return json.dumps({
@@ -85,6 +84,6 @@ def self_heal_script(script_path: str, error_message: str) -> str:
                 "error": "Could not automatically heal this error",
                 "error_message": error_message
             })
-            
+
     except Exception as e:
         return json.dumps({"success": False, "error": str(e)})

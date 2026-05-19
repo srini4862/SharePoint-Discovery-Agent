@@ -6,7 +6,7 @@ import json
 import uuid
 import threading
 import queue
-from pathlib import Path
+
 
 class PowerShellSession:
     """PowerShell session manager for maintaining persistent authenticated session."""
@@ -30,7 +30,8 @@ class PowerShellSession:
                 stderr=subprocess.PIPE,
                 text=True,
                 bufsize=1,
-                creationflags=subprocess.CREATE_NO_WINDOW if hasattr(subprocess, 'CREATE_NO_WINDOW') else 0
+                creationflags=subprocess.CREATE_NO_WINDOW if hasattr(
+                    subprocess, 'CREATE_NO_WINDOW') else 0
             )
 
     def execute_command(self, command: str, timeout: int = 300) -> dict:
@@ -40,7 +41,7 @@ class PowerShellSession:
             proc = self.process
             if proc is None:
                 return {"success": False, "error": "PowerShell process failed to initialize."}
-            
+
             marker = str(uuid.uuid4())
             # Wrap command in try/catch to capture output and exit code correctly
             full_command = f"""
@@ -76,8 +77,10 @@ try {{
             stdout_q = queue.Queue()
             stderr_q = queue.Queue()
 
-            t_out = threading.Thread(target=reader, args=(proc.stdout, stdout_q, f"{marker}_END_OUT"))
-            t_err = threading.Thread(target=reader, args=(proc.stderr, stderr_q, f"{marker}_END_ERR"))
+            t_out = threading.Thread(target=reader, args=(
+                proc.stdout, stdout_q, f"{marker}_END_OUT"))
+            t_err = threading.Thread(target=reader, args=(
+                proc.stderr, stderr_q, f"{marker}_END_ERR"))
 
             t_out.start()
             t_err.start()
@@ -93,7 +96,7 @@ try {{
 
             while not stdout_q.empty():
                 stdout_lines.append(stdout_q.get().strip('\n'))
-            
+
             while not stderr_q.empty():
                 stderr_lines.append(stderr_q.get().strip('\n'))
 
@@ -118,10 +121,10 @@ try {{
         self.tenant_name = tenant_name
         self.tenant_id = tenant_id
         self.client_id = client_id
-        
+
         admin_url = f"https://{tenant_name}-admin.sharepoint.com"
         command = f"Connect-PnPOnline -Url '{admin_url}' -Tenant '{tenant_id}' -ClientId '{client_id}' -Interactive"
-        
+
         res = self.execute_command(command, timeout=300)
         if res["success"]:
             self.authenticated = True
@@ -157,7 +160,7 @@ def powershell_execute(script_path: str, parameters: dict) -> str:
             # Resolve relative to project root
             project_root = Path(__file__).parent.parent.parent
             script_path_obj = project_root / script_path
-            
+
         script_path_str = str(script_path_obj.resolve())
         if not script_path_obj.exists():
             return json.dumps({"error": f"Script not found at path: {script_path_str}", "success": False})
