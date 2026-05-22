@@ -1,0 +1,18 @@
+name: tenant_configuration
+description: Collects Microsoft 365 user inventory including account status, principal names, and global tenant settings.
+domain: tenant_discovery
+required_inputs:
+  - tenant_id
+  - client_id
+authentication_methods:
+  - delegated_interactive
+  - app_only
+scripts:
+  - scripts/discovery/user_inventory.ps1
+produces_artifacts:
+  - user_inventory.json
+dependencies:
+  - PnP.PowerShell
+execution_modes:
+  - platform_managed
+  - customer_managed

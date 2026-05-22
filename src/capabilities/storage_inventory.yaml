@@ -1,0 +1,20 @@
+name: storage_inventory
+description: Analyzes storage usage across SharePoint sites and OneDrive, calculating usage percentages and quotas.
+domain: sharepoint_discovery
+required_inputs:
+  - tenant_id
+  - client_id
+optional_inputs:
+  - scope
+authentication_methods:
+  - delegated_interactive
+  - app_only
+scripts:
+  - scripts/discovery/storage_inventory.ps1
+produces_artifacts:
+  - storage_inventory.json
+dependencies:
+  - PnP.PowerShell
+execution_modes:
+  - platform_managed
+  - customer_managed

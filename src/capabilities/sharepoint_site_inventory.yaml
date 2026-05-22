@@ -1,0 +1,20 @@
+name: sharepoint_site_inventory
+description: Collects comprehensive inventory of all SharePoint sites in the tenant including URLs, titles, templates, and basic storage quota data.
+domain: sharepoint_discovery
+required_inputs:
+  - tenant_id
+  - client_id
+optional_inputs:
+  - scope
+authentication_methods:
+  - delegated_interactive
+  - app_only
+scripts:
+  - scripts/discovery/site_inventory.ps1
+produces_artifacts:
+  - site_inventory.json
+dependencies:
+  - PnP.PowerShell
+execution_modes:
+  - platform_managed
+  - customer_managed

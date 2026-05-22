@@ -2,16 +2,18 @@
 
 from agents.subagents import (
     intake_subagent,
-    planning_subagent,
-    installation_subagent,
+    capability_reasoning_subagent,
+    readiness_subagent,
     execution_subagent,
+    artifact_analysis_subagent,
     reporting_subagent,
 )
 
 __all__ = [
     "intake_subagent",
-    "planning_subagent",
-    "installation_subagent",
+    "capability_reasoning_subagent",
+    "readiness_subagent",
     "execution_subagent",
+    "artifact_analysis_subagent",
     "reporting_subagent",
 ]

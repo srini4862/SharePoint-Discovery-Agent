@@ -2,6 +2,7 @@
 
 from langchain_core.tools import tool
 import json
+from pathlib import Path
 
 
 @tool
@@ -42,5 +43,26 @@ def file_read(file_path: str) -> str:
             return json.dumps({"success": False, "error": "File does not exist"})
         content = path.read_text()
         return json.dumps({"success": True, "content": content})
+    except Exception as e:
+        return json.dumps({"success": False, "error": str(e)})
+
+
+@tool
+def file_list(directory_path: str) -> str:
+    """
+    List files in a directory.
+
+    Args:
+        directory_path: Path to the directory
+
+    Returns:
+        List of file names or error message
+    """
+    try:
+        path = Path(directory_path)
+        if not path.exists() or not path.is_dir():
+            return json.dumps({"success": False, "error": "Directory does not exist"})
+        files = [f.name for f in path.iterdir() if f.is_file()]
+        return json.dumps({"success": True, "files": files})
     except Exception as e:
         return json.dumps({"success": False, "error": str(e)})

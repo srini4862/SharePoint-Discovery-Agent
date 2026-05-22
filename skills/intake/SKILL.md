@@ -5,7 +5,7 @@ license: Proprietary
 
 metadata:
   author: wfx-org
-  version: "1.0"
+  version: "2.0"
 
 intent:
   - sharepoint discovery intake
@@ -30,14 +30,10 @@ tags:
 
 This skill provides operational guidance for collecting discovery readiness information required to safely and successfully execute SharePoint discovery operations.
 
-The intake agent should use this guidance to:
-- understand operational objectives
-- determine execution readiness requirements
-- validate authentication and permissions
-- identify blockers and constraints
-- prepare downstream execution context
-
-The intake process should remain adaptive, execution-oriented, and driven by operational relevance rather than static questionnaires.
+The intake agent uses this knowledge to reason about what is operationally
+required to enable successful discovery execution — not to complete a
+static questionnaire. Intake behavior should be adaptive, execution-oriented,
+and driven by what is actually needed to proceed safely and successfully.
 
 ---
 

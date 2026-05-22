@@ -1,0 +1,20 @@
+name: pages_inventory
+description: Inventories SharePoint site pages across the tenant to distinguish between legacy Classic pages and Modern pages.
+domain: sharepoint_discovery
+required_inputs:
+  - tenant_id
+  - client_id
+optional_inputs:
+  - scope
+authentication_methods:
+  - delegated_interactive
+  - app_only
+scripts:
+  - scripts/discovery/pages_inventory.ps1
+produces_artifacts:
+  - pages_inventory.json
+dependencies:
+  - PnP.PowerShell
+execution_modes:
+  - platform_managed
+  - customer_managed

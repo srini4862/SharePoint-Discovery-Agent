@@ -1,0 +1,20 @@
+name: permissions_inventory
+description: Extracts site administrators, owners, and sharing capabilities for SharePoint sites across the tenant.
+domain: sharepoint_discovery
+required_inputs:
+  - tenant_id
+  - client_id
+optional_inputs:
+  - scope
+authentication_methods:
+  - delegated_interactive
+  - app_only
+scripts:
+  - scripts/discovery/permissions_inventory.ps1
+produces_artifacts:
+  - permissions_inventory.json
+dependencies:
+  - PnP.PowerShell
+execution_modes:
+  - platform_managed
+  - customer_managed

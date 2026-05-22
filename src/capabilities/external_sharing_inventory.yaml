@@ -1,0 +1,20 @@
+name: external_sharing_inventory
+description: Inventories SharePoint external sharing settings across the tenant to identify sites that allow guest access, anonymous links, and domain restrictions.
+domain: security_discovery
+required_inputs:
+  - tenant_id
+  - client_id
+optional_inputs:
+  - scope
+authentication_methods:
+  - delegated_interactive
+  - app_only
+scripts:
+  - scripts/discovery/external_sharing_inventory.ps1
+produces_artifacts:
+  - external_sharing_inventory.json
+dependencies:
+  - PnP.PowerShell
+execution_modes:
+  - platform_managed
+  - customer_managed

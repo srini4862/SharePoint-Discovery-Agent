@@ -1,0 +1,20 @@
+name: customizations_inventory
+description: Inventories SharePoint Framework (SPFx) solutions, apps, and legacy add-ins deployed in the tenant App Catalog.
+domain: sharepoint_discovery
+required_inputs:
+  - tenant_id
+  - client_id
+optional_inputs:
+  - scope
+authentication_methods:
+  - delegated_interactive
+  - app_only
+scripts:
+  - scripts/discovery/customizations_inventory.ps1
+produces_artifacts:
+  - customizations_inventory.json
+dependencies:
+  - PnP.PowerShell
+execution_modes:
+  - platform_managed
+  - customer_managed
